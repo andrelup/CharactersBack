@@ -1,17 +1,16 @@
 const getDb = require("../util/database").getDb;
 
-class Product {
-  constructor(title, price, description, imageUrl) {
-    this.title = title;
-    this.price = price;
-    this.description = description;
-    this.imageUrl = imageUrl;
+class Users {
+  constructor(email, password, favourites) {
+    this.email = email;
+    this.password = password;
+    this.favourites = favourites;
   }
 
   save() {
     const db = getDb();
     return db
-      .collection("products")
+      .collection("users")
       .insertOne(this)
       .then((result) => {
         console.log(result);
@@ -20,16 +19,26 @@ class Product {
         console.log(err);
       });
   }
-
-  static fetchAll() {
+  edit() {
+    const db = getDb();
+    return db.collection("users").findOneAndUpdate({ email: this.email }, this);
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
+  static find(email) {
+    console.log("EMAIL: ", email);
     const db = getDb();
     return db
-      .collection("products")
-      .find()
+      .collection("users")
+      .find({ email: email })
       .toArray()
-      .then((products) => {
-        console.log(products);
-        return products;
+      .then((user) => {
+        console.log(user);
+        return user;
       })
       .catch((err) => {
         console.log(err);
@@ -37,4 +46,4 @@ class Product {
   }
 }
 
-module.exports = Product;
+module.exports = Users;
