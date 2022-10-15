@@ -1,0 +1,21 @@
+{
+  "name": "charactersback",
+  "version": "1.0.0",
+  "description": "API REST application for characters app",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "CharactersBack"
+  },
+  "author": "andrelp",
+  "license": "ISC",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongodb": "^4.10.0",
+    "morgan": "~1.9.1"
+  }
+}
