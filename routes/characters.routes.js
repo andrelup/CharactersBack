@@ -20,6 +20,10 @@ router.get("/characters", async (req, res) => {
     .then((res) => res.text())
     .then((text) => {
       res.send(text);
+    })
+    .catch((error) => {
+      console.log("ERROR: ", error);
+      res.status(500).send(error);
     });
 });
 router.get("/characters/:id", (req, res) => {
@@ -32,6 +36,10 @@ router.get("/characters/:id", (req, res) => {
     .then((text) => {
       console.log("GET character by id: ", text);
       res.send(text);
+    })
+    .catch((error) => {
+      console.log("ERROR: ", error);
+      res.status(500).send(error);
     });
 });
 

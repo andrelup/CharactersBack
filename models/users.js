@@ -13,7 +13,12 @@ class Users {
   }
   edit() {
     const db = getDb();
-    return db.collection("users").findOneAndUpdate({ email: this.email }, this);
+    return db
+      .collection("users")
+      .findOneAndUpdate(
+        { email: this.email },
+        { $set: { password: this.password, favourites: this.favourites } }
+      );
   }
   static find(email) {
     const db = getDb();
