@@ -14,7 +14,6 @@ router.get("/users/:email", (req, res, next) => {
     });
 });
 router.post("/users/login", (req, res, next) => {
-  console.log("BODY: ", req.body);
   const email = req.body.email;
   const password = req.body.password;
   console.log("EMAIL: ", email);
@@ -24,16 +23,17 @@ router.post("/users/login", (req, res, next) => {
       console.log("User: ", user);
       if (user && user.length > 0) {
         if (user[0].password === password) {
-          res.send("OK login authorized");
+          res.send({ message: "OK login authorized" });
         } else {
-          res.status(401).send("Email or password incorrect");
+          res.status(401).send({ message: "Email or password incorrect" });
         }
       } else {
-        res.status(401).send("Email or password incorrect");
+        res.status(401).send({ message: "Email or password incorrect" });
       }
     })
     .catch((error) => {
       console.log("ERROR: ", error);
+      res.status(500).send(error);
     });
 });
 module.exports = router;

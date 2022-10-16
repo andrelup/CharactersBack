@@ -16,7 +16,6 @@ class Users {
     return db.collection("users").findOneAndUpdate({ email: this.email }, this);
   }
   static find(email) {
-    console.log("EMAIL: ", email);
     const db = getDb();
     return db.collection("users").find({ email: email }).toArray();
   }
