@@ -1,7 +1,32 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/users");
-
+router.post("/users/", (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const user = new Users(email, password);
+  console.log("User: ", user);
+  user
+    .save(user)
+    .then((userSaved) => {
+      console.log("User: ", userSaved);
+      res.send(user);
+    })
+    .catch((error) => {
+      console.log("ERROR: ", error);
+    });
+});
+router.put("/users/", (req, res, next) => {
+  const email = req.params.email;
+  Users.findAndUpdate(email)
+    .then((user) => {
+      console.log("User: ", user);
+      res.send(user);
+    })
+    .catch((error) => {
+      console.log("ERROR: ", error);
+    });
+});
 router.get("/users/:email", (req, res, next) => {
   const email = req.params.email;
   Users.find(email)
