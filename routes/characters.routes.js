@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const { verifyToken } = require("../util/auth");
 
-router.get("/characters", async (req, res) => {
+router.get("/characters", verifyToken, async (req, res) => {
   let queryParams = req.query;
   let url = new URL("https://rickandmortyapi.com/api/character");
   if (queryParams) {
@@ -24,7 +25,7 @@ router.get("/characters", async (req, res) => {
       res.status(500).send(error);
     });
 });
-router.get("/characters/:id", (req, res) => {
+router.get("/characters/:id", verifyToken, (req, res) => {
   const id = req.params.id;
   let filters = req.query;
   console.log("[getCharactersByid] filters: ", filters);

@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/users");
+const { verifyToken } = require("../util/auth");
+
 router.post("/users/", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -18,7 +20,7 @@ router.post("/users/", (req, res, next) => {
       res.status(500).send(error);
     });
 });
-router.put("/users/", (req, res, next) => {
+router.put("/users/", verifyToken, (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const favourites = req.body.favourites;
@@ -37,7 +39,7 @@ router.put("/users/", (req, res, next) => {
       res.status(500).send(error);
     });
 });
-router.get("/users/:email", (req, res, next) => {
+router.get("/users/:email", verifyToken, (req, res, next) => {
   const email = req.params.email;
   Users.find(email)
     .then((user) => {
@@ -49,27 +51,5 @@ router.get("/users/:email", (req, res, next) => {
       res.status(500).send(error);
     });
 });
-router.post("/users/login", (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  console.log("EMAIL: ", email);
-  console.log("PASSWORD: ", password);
-  Users.find(email)
-    .then((user) => {
-      console.log("User: ", user);
-      if (user && user.length > 0) {
-        if (user[0].password === password) {
-          res.send(user[0]);
-        } else {
-          res.status(401).send({ message: "Email or password incorrect" });
-        }
-      } else {
-        res.status(401).send({ message: "Email or password incorrect" });
-      }
-    })
-    .catch((error) => {
-      console.log("ERROR: ", error);
-      res.status(500).send(error);
-    });
-});
+
 module.exports = router;
