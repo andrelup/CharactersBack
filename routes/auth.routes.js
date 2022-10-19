@@ -2,7 +2,7 @@ jwt = require("jsonwebtoken");
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/users");
-const { verifyToken, createToken } = require("../util/auth");
+const { createToken } = require("../util/auth");
 const tokenPassword = "Hiberus2022";
 
 router.post("/auth/login", (req, res, next) => {
