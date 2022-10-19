@@ -36,6 +36,4 @@ router.post("/auth/login", (req, res, next) => {
     });
 });
 
-router.post("/auth/verify", verifyToken);
-
 module.exports = router;

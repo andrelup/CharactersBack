@@ -11,10 +11,12 @@
   "license": "ISC",
   "scripts": {
     "start": "node app.js",
+    "swagger-autogen": "node swagger.js",
     "build-docker": "docker build -t hiberus_backend:latest .",
     "run-docker": "docker run -d -p 3000:3000 --name hiberusBackend hiberus_backend:latest"
   },
   "dependencies": {
+    "and": "^0.0.3",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "~4.16.1",
@@ -22,6 +24,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.10.0",
     "morgan": "~1.9.1",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "swagger-autogen": "^2.22.0",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
   }
 }
