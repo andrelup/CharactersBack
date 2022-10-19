@@ -68,16 +68,16 @@ const filterCharacters = function (charactersList, filters) {
   console.log("episode: ", filters.episode);
   let charactersFilteredList = [];
   if (filters.name && filters.name.length > 0) {
-    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.name.trim(), "name");
+    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.name.trim(), "name", 'contains');
   }
   if (filters.specie && filters.specie.length > 0) {
-    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.specie.trim(), "species");
+    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.specie.trim(), "species", 'contains');
   }
   if (filters.status && filters.status.length > 0) {
-    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.status.trim(), "status");
+    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.status.trim(), "status", 'equal');
   }
   if (filters.gender && filters.gender.length > 0) {
-    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.gender.trim(), "gender");
+    charactersFilteredList = genericfilter(charactersList, charactersFilteredList, filters.gender.trim(), "gender", 'equal');
   }
   if (filters.location && filters.location.length > 0) {
     charactersFilteredList = filterByLocation(charactersList, charactersFilteredList, filters.location.trim());
@@ -87,17 +87,23 @@ const filterCharacters = function (charactersList, filters) {
   }
   return charactersFilteredList;
 };
-const genericfilter = function (charactersList, charactersFilteredList, filter, field) {
+const genericfilter = function (charactersList, charactersFilteredList, filter, field, type) {
   if (charactersFilteredList.length > 1) {
     return charactersFilteredList.filter((item) => {
       if (item[field]) {
-        return item[field].toLowerCase().includes(filter.toLowerCase());
+        if (type === "contains") {
+          return item[field].toLowerCase().includes(filter.toLowerCase());
+        } else if (type === "equal") {
+          if (item[field].toLowerCase() === filter.toLowerCase()) return item;
+        }
       }
     });
   } else {
     return charactersList.filter((item) => {
-      if (item[field]) {
+      if (type === "contains") {
         return item[field].toLowerCase().includes(filter.toLowerCase());
+      } else if (type === "equal") {
+        if (item[field].toLowerCase() === filter.toLowerCase()) return item;
       }
     });
   }
