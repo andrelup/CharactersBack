@@ -18,9 +18,10 @@ He usado `expressJS` y `nodeJS` para construir el backend, porque es la tecnolog
 Sin embargo en el trabajo usamos una versión antigua de node, y he decido hacer esta prueba en la ultima versión de nodeJS más estable(16.18.0) para que puedan ver que también puedo salir de mi zona de conforto y construir un buen producto.
 Las demás Librerías he usado dentro del proyecto front fueran las que son más usadas dentro de la comunidad nodeJS, porque acaban por ser las mejores documentadas y por si encontro algun error raro tengo el apoyo de la comunidad.
 Estas serían:
-    1. `node-fetch` para consultar otra API;
-    2. `mongodb` para consultar la base de datos;
-    3. `jsonwebtoken` para gestionar el token de seguridad;
+
+- `node-fetch` para consultar otra API;
+- `mongodb` para consultar la base de datos;
+- `jsonwebtoken` para gestionar el token de seguridad;
 
 # Base de datos 
 La base de datos ya está totalmente configurada, porque he usado mongodb Atlas para crear una base de datos en la cloud. 
