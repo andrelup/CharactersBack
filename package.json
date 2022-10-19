@@ -10,7 +10,9 @@
   "author": "andrelp",
   "license": "ISC",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build-docker": "docker build -t hiberus_backend:latest .",
+    "run-docker": "docker run -d -p 3000:3000 --name hiberusBackend hiberus_backend:latest"
   },
   "dependencies": {
     "body-parser": "^1.20.1",
